@@ -1,0 +1,45 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block fos_user_content %}
+    <div class="container">
+        <h1>{% if marsupilami.id %}Modifier {{ marsupilami.username }} {% else %}Ajouter{% endif %}</h1>
+
+        {{ form_start(form) }}
+
+        <div class="row">
+            <div class="col-xs-5 col-xs-offset-1">
+                {{ form_row(form.username) }}
+            </div>
+            <div class="col-xs-6 ">
+                {{ form_row(form.age) }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-5 col-xs-offset-1">
+                {{ form_row(form.color) }}
+            </div>
+            <div class="col-xs-6">
+                {{ form_row(form.food) }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-5 col-xs-offset-1">
+                {{ form_row(form.race) }}
+            </div>
+            <div class="col-xs-6" >
+                {{ form_row(form.family) }}
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-xs-7 col-xs-offset-1">
+                <a href=" {{ path('app_marsupilami_index') }}" class="btn btn-link">Annuler</a>
+                <button type="submit" class="btn btn-primary">{{ marsupilami.id ? 'Modifier' : 'Ajouter' }}</button>
+            </div>
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+{% endblock fos_user_content %}

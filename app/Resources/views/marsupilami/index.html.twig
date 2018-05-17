@@ -1,0 +1,48 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block fos_user_content %}
+    <div class="container">
+
+        <h1>Tableau des Marsupilamis</h1>
+		  
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-condensed table-hover">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th> </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% set ma_route = app.request.attributes.get('_route') %}
+                {% set token = csrf_token('FRIEND_TOKEN') %}
+                {% for marsupilami in pagination %}
+                    <tr>
+                        <th>{{ marsupilami.id }}</th>
+                        <td>{{ marsupilami.username }}</td>
+                     
+                        <td>
+                             
+						       <a href="{{ path('app_marsupilami_add', {id:marsupilami.id, _token:token}) }}"
+                                   class="btn btn-warning btn-sm">Ajouter cet ami</a>    
+		                      
+						 </td>
+                         
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+			<a href="{{ path('app_marsupilami_view') }}"
+                 class="btn btn-success btn-sm col-sm-offset-1 col-sm-2" >Gérer</a><br><br>
+		  <div class="text-center">
+            {{ knp_pagination_render(pagination) }}
+          </div>
+    </div>
+  
+{% endblock fos_user_content %}

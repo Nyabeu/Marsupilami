@@ -1,0 +1,29 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block title %}Modification{% endblock %}
+
+{% block fos_user_content %}
+ <div class="container">
+
+    <h1> Modification de {{ marsupilami.username}} </h1>
+
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-xs-6"> {{ form_row(form.username) }} </div>
+		<div class="col-xs-6"> {{ form_row(form.age) }} </div>
+    </div>
+    <div class="row">
+           <div class="col-xs-6"> {{ form_row(form.color) }} </div>
+        <div class="col-xs-6"> {{ form_row(form.race) }} </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6"> {{ form_row(form.family) }} </div>
+        <div class="col-xs-6"> {{ form_row(form.food) }} </div>
+    </div>
+	
+	<a href="{{ path('app_marsupilami_view',{id:marsupilami.id}) }}" class="btn btn-link">Annuler</a>
+    <button type="submit" class="btn btn-primary">Valider</button>
+   
+    {{ form_end(form) }}
+</div>
+{% endblock fos_user_content %}

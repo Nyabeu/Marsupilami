@@ -1,0 +1,71 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block fos_user_content %}
+    <div class="container">
+
+
+        <h1> Information Personnelle </h1>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+
+                <thead>
+					<th>Id</th>
+					<th>Nom</th>
+					<th>Couleur</th>
+					<th>Age</th>
+					<th>Famille</th>
+					<th>Race</th>
+					<th>Nourriture</th>
+					<th></th>
+                </thead>
+
+                <tbody>
+				 {% set ma_route = app.request.attributes.get('_route') %}
+                {% set token = csrf_token('FRIEND_TOKEN') %}
+                <tr>
+                     <td>{{ marsupilami.id }}</td>
+                     <td>{{ marsupilami.username }}</td>
+					 <td>{{ marsupilami.color}}</td>
+                     <td>
+					   {% set age = marsupilami.age < 0 ? 0 : marsupilami.age %}
+					    {{ age }} an{% if age > 1 %}s{% endif %}
+					 </td>
+					 <td>{{ marsupilami.family}}</td>
+                     <td>{{ marsupilami.race }}</td>
+					 <td>{{ marsupilami.food }}</td>
+					 <td>
+                        <a href="{{ path('app_marsupilami_update',{id:marsupilami.id}) }}"
+                           class="btn btn-warning btn-sm btn-block">Modifier</a>
+                    </td>
+                </tr>
+           
+                </tbody>
+            </table>
+			<h1>Liste des Amis</h1>
+			 <div class="table-responsive">
+             <table class="table table-bordered table-striped">
+			 <tbody>
+	           {% for friend in friends %}
+	              <tr>
+                     <td><span class="label label-default col-xs-3">{{ friend.username }}</span>
+					 </td>			
+			         <td class="col-xs-offset-2 col-xs-3"> 
+			            <a href="{{ path('app_marsupilami_delete',{id:friend.id,_token:token}) }}"
+                              class="btn btn-danger  btn-xs">Supprimer</a>
+			         </td>			   
+		         </tr>
+			   {% endfor %}
+		
+	         </tbody>
+            </table>
+				  <a  href="{{ path('app_marsupilami_index') }}" class="btn btn-sm btn-primary  col-xs-2 col-xs-offset-1">Retour</a>
+
+			</div>
+
+       	  
+           
+ 
+       
+    
+{% endblock fos_user_content %}
